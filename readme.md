@@ -6,7 +6,7 @@ This repository provides an MQTT connectivity library for building Java-based em
 
 All three APIs (blocking, future, and callback) share the same connection setup. In order to get started, you'll need to create a new instance of the `Emitter` class (or get a default one) and retrieve the desired API implementation. Below, the simple usage of the blocking API is demonstrated.
 
-´´´java
+```java
 // Get an implementation of a blocking connection
 final BlockingConnection connection = Emitter.getDefault().blockingConnection();
 try {
@@ -34,13 +34,13 @@ try {
 } catch (Exception e) {
 	e.printStackTrace();
 }
-´´´
+```
 
 ## Using Asynchronous (Non-Blocking) API
 
 The asynchronous API is using [futures & promises](https://en.wikipedia.org/wiki/Futures_and_promises) pattern to orchestrate the method calls. The usage is similar to the previous example and is demonstrated below.
 
-´´´java
+```java
 final FutureConnection connection = Emitter.getDefault().futureConnection();
     	
 // Connects asynchronously to the service
@@ -75,7 +75,7 @@ connection.connect().then(new Callback<Void>(){
 	// Occurs if the connect operation fails
 	public void onFailure(Throwable value) { }
 });
-´´´
+```
 
 
 ## Advanced API Features
