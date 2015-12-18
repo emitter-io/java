@@ -23,6 +23,9 @@ import org.fusesource.hawtbuf.UTF8Buffer;
 import org.fusesource.hawtdispatch.DispatchQueue;
 import org.fusesource.hawtdispatch.Task;
 
+import io.emitter.KeyGenRequest;
+import io.emitter.KeyGenResponse;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -138,6 +141,16 @@ public class FutureConnection {
         next.getDispatchQueue().execute(new Task() {
             public void run() {
                 next.subscribe(topics, future);
+            }
+        });
+        return future;
+    }
+    
+    public Future<KeyGenResponse> keygen(final KeyGenRequest request){
+        final Promise<KeyGenResponse> future = new Promise<KeyGenResponse>();
+        next.getDispatchQueue().execute(new Task() {
+            public void run() {
+                next.keygen(request, future);
             }
         });
         return future;

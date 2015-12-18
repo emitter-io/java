@@ -47,6 +47,9 @@ import org.fusesource.hawtdispatch.transport.HeartBeatMonitor;
 import org.fusesource.hawtdispatch.transport.SslTransport;
 import org.fusesource.hawtdispatch.transport.TcpTransport;
 import org.fusesource.hawtdispatch.transport.Transport;
+
+import io.emitter.KeyGenRequest;
+import io.emitter.KeyGenResponse;
 import io.emitter.mqtt.codec.CONNACK;
 import io.emitter.mqtt.codec.DISCONNECT;
 import io.emitter.mqtt.codec.MQTTFrame;
@@ -614,6 +617,13 @@ public class CallbackConnection {
             }
         });
     }
+    
+    private Callback<KeyGenResponse> keygenCallback = null;
+    
+    public void keygen(KeyGenRequest request, Callback<KeyGenResponse> cb){
+    	this.keygenCallback = cb;
+    	this.publish(null, "emitter/keygen/", request.toJson().getBytes(), null);
+    }
 
     public void publish(String key, String channel, byte[] payload, Callback<Void> cb) {
     	String topic = key == null 
@@ -837,6 +847,24 @@ public class CallbackConnection {
     static public final Task NOOP = Dispatch.NOOP;
 
     private void toReceiver(final PUBLISH publish) {
+    	
+    	if (publish.topicName().toString().equals("emitter/keygen/")){
+    		if(this.keygenCallback == null)
+    			return;
+    		
+    		try{
+	    		// We don't need a listener for this
+	    		KeyGenResponse response = KeyGenResponse.fromJson(
+						new String(publish.payload().toByteArray())
+						);
+	    		
+	    		
+	    		this.keygenCallback.onSuccess(response);
+    		}catch(Throwable e){
+    			this.keygenCallback.onFailure(e);
+    		}
+    	}
+    	
         if( listener !=null ) {
             try {
                 Runnable cb = NOOP;

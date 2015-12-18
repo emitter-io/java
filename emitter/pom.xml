@@ -77,9 +77,9 @@
     </dependency>
     
     <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>20090211</version>
+      <groupId>com.cedarsoftware</groupId>
+      <artifactId>json-io</artifactId>
+      <version>4.3.0</version>
     </dependency>
 
   </dependencies>
@@ -136,11 +136,11 @@
                 <groupId>org.fusesource.hawtbuf</groupId>
                 <artifactId>hawtbuf</artifactId>
               </inclusion>
-              
-             <inclusion>
-                <groupId>org.json</groupId>
-                <artifactId>json</artifactId>
-              </inclusion>
+
+              <inclusion>
+                <groupId>com.cedarsoftware</groupId>
+                <artifactId>json-io</artifactId>
+              </inclusion> 
               
             </inclusions>
           </assembly>

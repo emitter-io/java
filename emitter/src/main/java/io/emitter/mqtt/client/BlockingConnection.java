@@ -22,6 +22,9 @@ import org.fusesource.hawtbuf.Buffer;
 import org.fusesource.hawtbuf.UTF8Buffer;
 import org.fusesource.hawtdispatch.Task;
 
+import io.emitter.KeyGenRequest;
+import io.emitter.KeyGenResponse;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -57,6 +60,11 @@ public class BlockingConnection {
     public void kill() throws Exception {
         this.next.kill().await();
     }
+    
+    public KeyGenResponse keygen(final KeyGenRequest request) throws Exception {
+        return this.next.keygen(request).await();
+    }
+
     
     public byte[] subscribe(final Topic topic) throws Exception{
     	Topic[] ta = new Topic[]{ topic };

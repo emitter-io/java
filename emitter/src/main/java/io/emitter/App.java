@@ -33,8 +33,8 @@ public class App
     public static void main( String[] args )
     {
         App app = new App();
-        //app.demoSync();
-        app.demoAsync();
+        app.demoSync();
+        //app.demoAsync();
     }
 
     /**
@@ -54,14 +54,17 @@ public class App
 	    	// Publish a message
 	    	connection.publish(key, "hello", "hello, emitter!".getBytes());
 	    	
-	    	// Receive 10 messages
-	    	for(int i=0; i < 10; ++i){
-	    		// Receive a message and get the payload buffer
-	    		Message msg = connection.receive();
-	    		
-	    		// Print it out
-	    		System.out.println(msg.getPayloadBuffer());
-	    	}
+    		// Receive a message
+    		Message msg = connection.receive();
+    		
+    		// Print it out
+    		System.out.println(msg.getPayloadBuffer());
+    	
+    		// Generate a key
+	    	System.out.println(
+	    			connection.keygen(
+	    					new KeyGenRequest("secret key", "test", "rw", 100)
+	    					));
 	    	
 	    	// Disconnect ourselves
 	    	connection.disconnect();
