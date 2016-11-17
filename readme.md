@@ -1,6 +1,8 @@
 ## Overview
 
-This repository provides an MQTT connectivity library for building Java-based emitter.io applications. The library uses core technolgy developed by [FuseSource Corp.](https://github.com/fusesource/mqtt-client) and is released under ASL 2.0 license. The library takes care of automatically reconnecting to your MQTT server and restoring your client session if any network failures occur. Applications can use a blocking API style, a futures based API, or a callback/continuations passing API style.
+This repository contains Java client for [Emitter](https://emitter.io) (see also on [Emitter GitHub](https://github.com/emitter-io/emitter)). Emitter is an **open-source** real-time communication service for connecting online devices. At its core, emitter.io is a distributed, scalable and fault-tolerant publish-subscribe messaging platform based on MQTT protocol and featuring message storage.
+
+The library uses core technolgy developed by [FuseSource Corp.](https://github.com/fusesource/mqtt-client) and is released under ASL 2.0 license. The library takes care of automatically reconnecting to your MQTT server and restoring your client session if any network failures occur. Applications can use a blocking API style, a futures based API, or a callback/continuations passing API style.
 
 ## Using Synchronous (Blocking) API
 
